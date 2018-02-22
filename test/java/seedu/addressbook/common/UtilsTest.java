@@ -38,14 +38,25 @@ public class UtilsTest {
 
     @Test
     public void isAnyNull() throws Exception {
-
         //empty list
         assertNoNull();
 
         // all objects null
         assertContainNulls(null, null);
         assertContainNulls(null, null, null);
+        assertContainNulls(null, null, null, null);
 
+        // some null objects
+        assertContainNulls(null, "abc");
+        assertContainNulls(1, null, "abc");
+        assertContainNulls("abc", "", "abc", "ABC", null);
+        assertContainNulls(1, new Integer(1), null);
+        assertContainNulls(null, "a", "b", null);
+
+        // no null objects
+        assertNoNull("abc", "abc");
+        assertNoNull(1, new Integer(1));
+        assertNoNull("abc", "", "abc", "ABC");
     }
 
     private void assertAreUnique(Object... objects) {
